@@ -3,15 +3,19 @@ kind: Ingress
 metadata:
   name: music-event-core-app-ingress
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-test
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    #    - /$2 means “replace the upstream request path with the content
-    #   of the second capture group from the regex in path.”
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - music-event-bot.duckdns.org
+      secretName: music-event-bot-tls  # Reuse same cert
   rules:
-    - host: 66-228-63-42.ip.linodeusercontent.com
+    - host: music-event-bot.duckdns.org
       http:
         paths:
           - path: /music-event-core(/|$)(.*)
@@ -27,10 +31,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kafka-ui-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-test
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - music-event-bot.duckdns.org
+      secretName: music-event-bot-tls  # Reuse same cert
   rules:
-    - host: 66-228-63-42.ip.linodeusercontent.com
+    - host: music-event-bot.duckdns.org
       http:
         paths:
           - path: /kafka-ui
