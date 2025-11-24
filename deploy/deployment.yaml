@@ -24,17 +24,17 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "test"
 
-            # configMap (name should match the name in app.yaml ${telegram-bot-username})
-            - name: TELEGRAM-BOT-USERNAME
+            # configMap (name should match the name in app.yaml ${TELEGRAM_BOT_USERNAME})
+            - name: TELEGRAM_BOT_USERNAME
               valueFrom:
-                configMapKeyRef:
-                  name: music-event-core-config-map
-                  key: telegram-bot-username
-            - name: TICKETMASTER-PAGE-SIZE
+                secretKeyRef:
+                  name: telegram-bot-credentials
+                  key: bot-username
+            - name: TELEGRAM_BOT_TOKEN
               valueFrom:
-                configMapKeyRef:
-                  name: music-event-core-config-map
-                  key: ticketmaster-page-size
+                secretKeyRef:
+                  name: telegram-bot-credentials
+                  key: bot-token
             - name: MUSIC-EVENT-AUTH-URL
               valueFrom:
                 configMapKeyRef:
@@ -42,11 +42,6 @@ spec:
                   key: music-event-auth-url
 
             # secrets
-            - name: TELEGRAM-BOT-TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: music-event-core-secrets
-                  key: telegram-bot-token
             - name: TICKETMASTER-APIKEY
               valueFrom:
                 secretKeyRef:
