@@ -10,10 +10,3 @@ spring:
         topic: telegram-bot-user-received-event
         consumer:
           bootstrap-servers: localhost:29092
-
-telegram:
-  bot_username: MusicEvenHelperBot    #use vault
-  bot_token: 7941376949:AAHeus8Bg2E0aydGgWJEvtdOE1S3col-H1M   #use vault
-  ticketmaster_page_size: 3
-
-

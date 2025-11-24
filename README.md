@@ -4,6 +4,7 @@
 - http://66-228-63-42.ip.linodeusercontent.com/kafka-ui
 
 [![Java CI with Gradle](https://github.com/VitaliyPunko/spotify/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/VitaliyPunko/spotify/actions/workflows/gradle.yml)
+Bot configs are in [telegram-bot-secret.yaml]
 
 Kafka UI : http://66-228-63-42.ip.linodeusercontent.com/kafka-ui/ui/clusters/kafka-cluster/all-topics?page=1 
 

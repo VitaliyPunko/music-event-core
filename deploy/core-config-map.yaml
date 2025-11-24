@@ -5,5 +5,3 @@ metadata:
   namespace: default
 data:
   music-event-auth-url: "https://music-event-bot.duckdns.org"
-  telegram-bot-username: "MusicEvenHelperBot"
-  ticketmaster-page-size: "3"

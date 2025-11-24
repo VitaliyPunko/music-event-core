@@ -15,8 +15,3 @@ application:
   credentials:
     ticketmaster:
       apikey: ${ticketmaster-apikey}
-
-telegram:
-  bot_username: ${telegram-bot-username}
-  bot_token: ${telegram-bot-token}
-  ticketmaster_page_size: ${ticketmaster-page-size}
