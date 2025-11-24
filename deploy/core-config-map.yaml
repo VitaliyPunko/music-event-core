@@ -4,6 +4,6 @@ metadata:
   name: music-event-core-config-map
   namespace: default
 data:
-  music-event-auth-url: "http://localhost:9000"
+  music-event-auth-url: "https://music-event-bot.duckdns.org"
   telegram-bot-username: "MusicEvenHelperBot"
   ticketmaster-page-size: "3"
