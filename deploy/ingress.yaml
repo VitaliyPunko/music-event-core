@@ -12,10 +12,11 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - music-event-bot.duckdns.org
-      secretName: music-event-bot-tls  # Reuse same cert
+        - music-bot-prod.duckdns.org
+      secretName: music-bot-prod-tls
+
   rules:
-    - host: music-event-bot.duckdns.org
+    - host: music-bot-prod.duckdns.org
       http:
         paths:
           - path: /music-event-core(/|$)(.*)

@@ -10,6 +10,7 @@ spring:
         topic: music-event-core-topic
         consumer:
           bootstrap-servers: kafka-kafka-bootstrap.kafka-namespace.svc.cluster.local:29092
+          groupId: music-event-core-group
 
 application:
   credentials:

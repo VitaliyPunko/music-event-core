@@ -9,4 +9,5 @@ spring:
       telegram-bot-user-received-event:
         topic: telegram-bot-user-received-event
         consumer:
+          groupId: music-event-core-group
           bootstrap-servers: localhost:29092

@@ -19,6 +19,7 @@ spring:
         topic: telegram-bot-user-received-event
         consumer:
           bootstrap-servers: localhost:29092
+          groupId: test-group
 
   sql:
     init:
