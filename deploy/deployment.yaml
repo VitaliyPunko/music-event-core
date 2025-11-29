@@ -16,7 +16,7 @@ spec:
         - name: dockerhub-secret-music-core
       containers:
         - name: music-event-core-app
-          image: vitaliypunko/music-event-core:0.0.4-75e40db
+          image: vitaliypunko/music-event-core:0.0.4-a75a4b7
           ports:
             - containerPort: 8080
           env:
@@ -77,11 +77,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: music-event-core-app-service
+  labels:
+    app: music-event-core-app
 spec:
   selector:
     app: music-event-core-app
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 8080
   type: ClusterIP
