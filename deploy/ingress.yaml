@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: music-event-core-app-ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-test
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
@@ -12,11 +12,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - music-bot-prod.duckdns.org
-      secretName: music-bot-prod-tls
-
+        - music-event-bot.duckdns.org
+      secretName: music-event-bot-tls
   rules:
-    - host: music-bot-prod.duckdns.org
+    - host: music-event-bot.duckdns.org
       http:
         paths:
           - path: /music-event-core(/|$)(.*)
@@ -33,14 +32,14 @@ kind: Ingress
 metadata:
   name: kafka-ui-ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-test
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
         - music-event-bot.duckdns.org
-      secretName: music-event-bot-tls  # Reuse same cert
+      secretName: music-event-bot-tls
   rules:
     - host: music-event-bot.duckdns.org
       http:
