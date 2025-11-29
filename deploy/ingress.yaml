@@ -44,8 +44,8 @@ spec:
     - host: music-event-bot.duckdns.org
       http:
         paths:
-          - path: /kafka-ui
-            pathType: Prefix
+          - path: /kafka-ui(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: kafka-ui
