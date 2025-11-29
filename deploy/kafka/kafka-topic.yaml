@@ -8,11 +8,11 @@ metadata:
     strimzi.io/cluster: kafka  # Links to your Kafka cluster
 spec:
   partitions: 2
-  replicas: 3
+  replicas: 1
   # Custom Kafka configuration for this topic
   config:
     retention.ms: 604800000      # 7 days in milliseconds
     segment.bytes: 1073741824     # 1GB
     cleanup.policy: delete
     compression.type: producer
-    min.insync.replicas: 2
+    min.insync.replicas: 1

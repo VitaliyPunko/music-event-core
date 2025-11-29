@@ -17,9 +17,9 @@ spec:
         tls: false    # no Authentication
     # Default Kafka configuration for all new topics
     config:
-      offsets.topic.replication.factor: 3
-      default.replication.factor: 3
-      min.insync.replicas: 2
+      offsets.topic.replication.factor: 1
+      default.replication.factor: 1
+      min.insync.replicas: 1
       log.retention.hours: 168
     # Resources applied to all nodes in the pool
     resources:
@@ -56,7 +56,7 @@ metadata:
   labels:
     strimzi.io/cluster: kafka # Links to the Kafka resource above
 spec:
-  replicas: 3
+  replicas: 1
   roles:
     - controller
     - broker
