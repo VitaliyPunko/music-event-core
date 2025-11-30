@@ -21,9 +21,9 @@ public class TicketMasterRestClient {
     private final RestClient restClient;
 
     public TicketMasterRestClient(RestClient.Builder restClient,
-                                  @Value("${application.credentials.ticketmaster.apikey}")
+                                  @Value("${app.credentials.ticketmaster.apikey}")
                                   String apiKey,
-                                  @Value("${application.urls.ticketmaster}")
+                                  @Value("${app.urls.ticketmaster}")
                                   String baseUrl,
                                   @Value("${telegram.ticketmaster_page_size}")
                                   Integer pageSize) {

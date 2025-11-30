@@ -17,3 +17,10 @@ spring:
         producer:
           bootstrap-servers: localhost:29092
           clientId: ticket-master-response-producer
+
+app:
+  urls:
+    ticketmaster: https://app.ticketmaster.com/discovery/v2
+  credentials:
+    ticketmaster:
+      apikey: GdnEbnSIzFA31WRk3pvBSC2DhGMCHgHS

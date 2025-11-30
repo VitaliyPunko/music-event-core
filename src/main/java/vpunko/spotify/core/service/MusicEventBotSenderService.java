@@ -25,7 +25,5 @@ public class MusicEventBotSenderService {
         event.setChatId(data.getChatId());
 
         publisher.sendMessage(event);
-
-
     }
 }
