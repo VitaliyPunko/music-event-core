@@ -3,8 +3,8 @@ package vpunko.spotify.core.mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import vpunko.spotify.core.constant.TicketSaleEnum;
-import vpunko.spotify.core.dto.MusicEventDto;
 import vpunko.spotify.core.dto.TicketMasterEventResponse;
+import vpunko.spotify.core.dto.TicketmasterResponseEvent;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -19,14 +19,14 @@ import static vpunko.spotify.core.constant.TicketSaleEnum.*;
 public class TicketMasterMapper {
 
 
-    public List<MusicEventDto> map(TicketMasterEventResponse response) {
+    public List<TicketmasterResponseEvent> map(TicketMasterEventResponse response) {
         List<TicketMasterEventResponse.Event> events = response.get_embedded().getEvents();
 
-        List<MusicEventDto> musicEventDtoList = new ArrayList<>();
+        List<TicketmasterResponseEvent> ticketmasterResponseEventList = new ArrayList<>();
 
 
         for (TicketMasterEventResponse.Event event : events) {
-            var musicEventDto = new MusicEventDto();
+            var musicEventDto = new TicketmasterResponseEvent();
             //name
             musicEventDto.setName(event.getName());
 
@@ -82,19 +82,19 @@ public class TicketMasterMapper {
                 getVenue(embedded, musicEventDto);
             }
 
-            musicEventDtoList.add(musicEventDto);
+            ticketmasterResponseEventList.add(musicEventDto);
         }
 
-        return musicEventDtoList;
+        return ticketmasterResponseEventList;
     }
 
 
-    private void getVenue(TicketMasterEventResponse.Event.EmbeddedVenuesAttractions embedded, MusicEventDto musicEventDto) {
+    private void getVenue(TicketMasterEventResponse.Event.EmbeddedVenuesAttractions embedded, TicketmasterResponseEvent ticketmasterResponseEvent) {
         List<TicketMasterEventResponse.Event.EmbeddedVenuesAttractions.Venue> venues = embedded.getVenues();
         if (venues != null && !venues.isEmpty()) {
             var venue = venues.get(0);
 
-            MusicEventDto.MusicEventVenue musicEventVenue = new MusicEventDto.MusicEventVenue();
+            TicketmasterResponseEvent.MusicEventVenue musicEventVenue = new TicketmasterResponseEvent.MusicEventVenue();
             musicEventVenue.setName(venue.getName());
             musicEventVenue.setUrl(venue.getUrl());
             var country = venue.getCountry();
@@ -109,7 +109,7 @@ public class TicketMasterMapper {
             if (address != null) {
                 musicEventVenue.setAddress(address.getLine1());
             }
-            musicEventDto.setVenue(musicEventVenue);
+            ticketmasterResponseEvent.setVenue(musicEventVenue);
         }
 
     }

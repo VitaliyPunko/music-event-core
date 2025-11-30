@@ -9,7 +9,8 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class UserMessageRequestEvent implements Serializable {
 
-    String msg;
+    long chatId;
+    String message;
 }

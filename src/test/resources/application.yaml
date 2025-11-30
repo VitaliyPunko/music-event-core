@@ -16,10 +16,16 @@ spring:
   kafka:
     in:
       telegram-bot-user-received-event:
-        topic: telegram-bot-user-received-event
+        topic: music-event-core-topic
         consumer:
           bootstrap-servers: localhost:29092
           groupId: test-group
+    out:
+      ticket-master-response-event:
+        topic: ticket-master-response-topic
+        producer:
+          bootstrap-servers: localhost:29092
+          clientId: test-client-id
 
   sql:
     init:

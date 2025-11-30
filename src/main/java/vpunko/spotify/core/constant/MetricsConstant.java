@@ -4,4 +4,6 @@ public class MetricsConstant {
 
     public static final String APPLICATION_VERSION = "application_version";
     public static final String TELEGRAM_BOT_LISTENER_COUNTER = "telegram_bot_listener_counter";
+    public static final String TICKET_MASTER_RESPONSE_EVENT_PUBLISHER_COUNTER = "ticket_master_response_event_publisher_counter";
+
 }
