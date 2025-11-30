@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import vpunko.spotify.core.client.TicketMasterRestClient;
-import vpunko.spotify.core.dto.TicketMasterEventResponse;
+import vpunko.spotify.core.dto.TicketMasterEventClientResponse;
 import vpunko.spotify.security.TestConfig;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,7 +27,7 @@ class TicketMasterControllerTest {
     @MockitoBean
     private TicketMasterRestClient ticketMasterRestClient;
 
-    private TicketMasterEventResponse response = new TicketMasterEventResponse();
+    private TicketMasterEventClientResponse response = new TicketMasterEventClientResponse();
 
     @Test
     void getEventShouldReturnMockResponse() throws Exception {

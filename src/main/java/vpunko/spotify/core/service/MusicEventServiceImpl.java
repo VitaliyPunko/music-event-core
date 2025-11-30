@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import vpunko.spotify.core.client.TicketMasterRestClient;
-import vpunko.spotify.core.dto.TicketMasterEventResponse;
-import vpunko.spotify.core.dto.TicketmasterResponseEvent;
+import vpunko.spotify.core.dto.TicketMasterEventClientResponse;
+import vpunko.spotify.core.dto.TicketmasterEvent;
 import vpunko.spotify.core.mapper.TicketMasterMapper;
 
 import java.time.OffsetDateTime;
@@ -23,11 +23,11 @@ public class MusicEventServiceImpl {
     private final TicketMasterMapper mapper;
     private final TicketMasterRestClient ticketMasterRestClient;
 
-    public List<TicketmasterResponseEvent> getMusicEventByArtist(String artist) {
+    public List<TicketmasterEvent> getMusicEventByArtist(String artist) {
         //get big response. Get only some simple fields
         String offsetDateTimeRequiredFormat = OffsetDateTime.now().withOffsetSameInstant(ZoneOffset.UTC).format(formatter);
 
-        TicketMasterEventResponse response = ticketMasterRestClient.getEvent(artist, offsetDateTimeRequiredFormat);
+        TicketMasterEventClientResponse response = ticketMasterRestClient.getEvent(artist, offsetDateTimeRequiredFormat);
         if (response == null || response.get_embedded() == null) {
             return List.of();
         }

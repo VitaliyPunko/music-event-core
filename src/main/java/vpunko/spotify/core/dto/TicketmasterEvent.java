@@ -6,7 +6,7 @@ import vpunko.spotify.core.constant.TicketSaleEnum;
 import java.time.OffsetDateTime;
 
 @Data
-public class TicketmasterResponseEvent {
+public class TicketmasterEvent {
 
     /**
      * Event name

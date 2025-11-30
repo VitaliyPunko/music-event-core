@@ -3,8 +3,8 @@ package vpunko.spotify.core.mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import vpunko.spotify.core.constant.TicketSaleEnum;
-import vpunko.spotify.core.dto.TicketMasterEventResponse;
-import vpunko.spotify.core.dto.TicketmasterResponseEvent;
+import vpunko.spotify.core.dto.TicketMasterEventClientResponse;
+import vpunko.spotify.core.dto.TicketmasterEvent;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -19,19 +19,19 @@ import static vpunko.spotify.core.constant.TicketSaleEnum.*;
 public class TicketMasterMapper {
 
 
-    public List<TicketmasterResponseEvent> map(TicketMasterEventResponse response) {
-        List<TicketMasterEventResponse.Event> events = response.get_embedded().getEvents();
+    public List<TicketmasterEvent> map(TicketMasterEventClientResponse response) {
+        List<TicketMasterEventClientResponse.Event> events = response.get_embedded().getEvents();
 
-        List<TicketmasterResponseEvent> ticketmasterResponseEventList = new ArrayList<>();
+        List<TicketmasterEvent> ticketmasterEventList = new ArrayList<>();
 
 
-        for (TicketMasterEventResponse.Event event : events) {
-            var musicEventDto = new TicketmasterResponseEvent();
+        for (TicketMasterEventClientResponse.Event event : events) {
+            var musicEventDto = new TicketmasterEvent();
             //name
             musicEventDto.setName(event.getName());
 
             //dates
-            TicketMasterEventResponse.Event.Dates dates = event.getDates();
+            TicketMasterEventClientResponse.Event.Dates dates = event.getDates();
             if (dates != null) {
                 String eventDateTime = getDates(dates);
                 if (eventDateTime != null) {
@@ -40,13 +40,13 @@ public class TicketMasterMapper {
                 String timeZone = dates.getTimezone();
                 musicEventDto.setTimeZone(timeZone);
 
-                TicketMasterEventResponse.Event.Dates.Status status = dates.getStatus();
+                TicketMasterEventClientResponse.Event.Dates.Status status = dates.getStatus();
                 String code = status.getCode();
                 musicEventDto.setTicketSaleStatus(getTicketStatus(code));
             }
 
             //price
-            List<TicketMasterEventResponse.Event.PriceRange> priceRanges = event.getPriceRanges();
+            List<TicketMasterEventClientResponse.Event.PriceRange> priceRanges = event.getPriceRanges();
             if (priceRanges != null && !priceRanges.isEmpty()) {
                 var priceRange = priceRanges.get(0);
                 String currency = priceRange.getCurrency();
@@ -58,7 +58,7 @@ public class TicketMasterMapper {
             }
 
             //sale
-            Optional<TicketMasterEventResponse.Event.Sales.PublicSale> publicSale =
+            Optional<TicketMasterEventClientResponse.Event.Sales.PublicSale> publicSale =
                     Optional.ofNullable(event.getSales())
                             .map(s -> s.getPublicSale())
                             .filter(Objects::nonNull);
@@ -71,7 +71,7 @@ public class TicketMasterMapper {
             //description
             musicEventDto.setDescription(event.getPleaseNote());
             //image
-            List<TicketMasterEventResponse.Event.Image> images = event.getImages();
+            List<TicketMasterEventClientResponse.Event.Image> images = event.getImages();
             if (images != null && !images.isEmpty()) {
                 musicEventDto.setImageUrl(images.get(0).getUrl());
             }
@@ -82,19 +82,19 @@ public class TicketMasterMapper {
                 getVenue(embedded, musicEventDto);
             }
 
-            ticketmasterResponseEventList.add(musicEventDto);
+            ticketmasterEventList.add(musicEventDto);
         }
 
-        return ticketmasterResponseEventList;
+        return ticketmasterEventList;
     }
 
 
-    private void getVenue(TicketMasterEventResponse.Event.EmbeddedVenuesAttractions embedded, TicketmasterResponseEvent ticketmasterResponseEvent) {
-        List<TicketMasterEventResponse.Event.EmbeddedVenuesAttractions.Venue> venues = embedded.getVenues();
+    private void getVenue(TicketMasterEventClientResponse.Event.EmbeddedVenuesAttractions embedded, TicketmasterEvent ticketmasterEvent) {
+        List<TicketMasterEventClientResponse.Event.EmbeddedVenuesAttractions.Venue> venues = embedded.getVenues();
         if (venues != null && !venues.isEmpty()) {
             var venue = venues.get(0);
 
-            TicketmasterResponseEvent.MusicEventVenue musicEventVenue = new TicketmasterResponseEvent.MusicEventVenue();
+            TicketmasterEvent.MusicEventVenue musicEventVenue = new TicketmasterEvent.MusicEventVenue();
             musicEventVenue.setName(venue.getName());
             musicEventVenue.setUrl(venue.getUrl());
             var country = venue.getCountry();
@@ -109,13 +109,13 @@ public class TicketMasterMapper {
             if (address != null) {
                 musicEventVenue.setAddress(address.getLine1());
             }
-            ticketmasterResponseEvent.setVenue(musicEventVenue);
+            ticketmasterEvent.setVenue(musicEventVenue);
         }
 
     }
 
-    private String getDates(TicketMasterEventResponse.Event.Dates dates) {
-        TicketMasterEventResponse.Event.Dates.Start start = dates.getStart();
+    private String getDates(TicketMasterEventClientResponse.Event.Dates dates) {
+        TicketMasterEventClientResponse.Event.Dates.Start start = dates.getStart();
         if (start != null) {
             String dateTime = start.getDateTime();
             if (dateTime == null) {

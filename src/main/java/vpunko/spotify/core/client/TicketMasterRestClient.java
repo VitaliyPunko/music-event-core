@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
-import vpunko.spotify.core.dto.TicketMasterEventResponse;
+import vpunko.spotify.core.dto.TicketMasterEventClientResponse;
 import vpunko.spotify.core.exception.TicketMasterClientException;
 
 import java.util.Optional;
@@ -32,8 +32,8 @@ public class TicketMasterRestClient {
         this.restClient = restClient.baseUrl(baseUrl).build();
     }
 
-    public TicketMasterEventResponse getEvent(String keyWord, String startDate) {
-        TicketMasterEventResponse body = restClient.get()
+    public TicketMasterEventClientResponse getEvent(String keyWord, String startDate) {
+        TicketMasterEventClientResponse body = restClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/events")
                         .queryParam("keyword", keyWord)
                         .queryParam("size", pageSize)
@@ -48,7 +48,7 @@ public class TicketMasterRestClient {
                             response.getHeaders(),
                             response.getBody().toString());
                 })
-                .body(TicketMasterEventResponse.class);
+                .body(TicketMasterEventClientResponse.class);
 
         if (body == null) {
             throw new TicketMasterClientException("TicketMasterClient return null body");

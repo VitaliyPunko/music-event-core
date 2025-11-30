@@ -24,7 +24,7 @@ public class UserMessageRequestBotEventKafkaListener {
     @KafkaListener(topics = "${spring.kafka.in.telegram-bot-user-received-event.topic}")
     @Counted(value = TELEGRAM_BOT_LISTENER_COUNTER)
     void listener(@Payload UserMessageRequestEvent data) {
-        log.info("Received message [{}] in topic music-event-core-topic }", data);
+        log.info("Received message [{}] from music-event-core-topic }", data);
 
         botSenderService.sendMessageToMusicBot(data);
     }
