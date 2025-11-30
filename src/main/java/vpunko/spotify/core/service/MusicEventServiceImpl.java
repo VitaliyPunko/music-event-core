@@ -24,7 +24,7 @@ public class MusicEventServiceImpl {
     private final TicketMasterRestClient ticketMasterRestClient;
 
     public List<TicketmasterEvent> getMusicEventByArtist(String artist) {
-        //get big response. Get only some simple fields
+        //get a big response. Get only some simple fields
         String offsetDateTimeRequiredFormat = OffsetDateTime.now().withOffsetSameInstant(ZoneOffset.UTC).format(formatter);
 
         TicketMasterEventClientResponse response = ticketMasterRestClient.getEvent(artist, offsetDateTimeRequiredFormat);

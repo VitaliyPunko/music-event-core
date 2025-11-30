@@ -33,13 +33,6 @@ logging:
   level:
     org.springframework.security: INFO
 
-application:
-  urls:
-    ticketmaster: https://app.ticketmaster.com/discovery/v2
-  credentials:
-    ticketmaster:
-      apikey: GdnEbnSIzFA31WRk3pvBSC2DhGMCHgHS    #use vault
-
 telegram:
   bot_username: ${TELEGRAM_BOT_USERNAME}
   bot_token: ${TELEGRAM_BOT_TOKEN}

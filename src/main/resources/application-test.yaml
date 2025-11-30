@@ -18,7 +18,7 @@ spring:
           bootstrap-servers: kafka-kafka-bootstrap.kafka-namespace.svc.cluster.local:29092
           clientId: ticket-master-response-producer
 
-application:
+app:
   credentials:
     ticketmaster:
-      apikey: ${ticketmaster-apikey}
+      apikey: ${TICKETMASTER-APIKEY}
