@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class TicketMasterEventResponse {
+public class TicketMasterEventClientResponse {
 
     private Embedded _embedded;
     private Links _links;

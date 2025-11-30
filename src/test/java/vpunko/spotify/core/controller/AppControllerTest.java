@@ -9,7 +9,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import vpunko.spotify.core.dto.TicketmasterResponseEvent;
+import vpunko.spotify.core.dto.TicketmasterEvent;
 import vpunko.spotify.core.service.MusicEventServiceImpl;
 import vpunko.spotify.security.TestConfig;
 
@@ -30,7 +30,7 @@ class AppControllerTest {
     @MockitoBean
     private MusicEventServiceImpl musicEventService;
 
-    private List<TicketmasterResponseEvent> musicEventsResponse = List.of();
+    private List<TicketmasterEvent> musicEventsResponse = List.of();
 
     @Test
     void getEventByArtistShouldReturnMockResponse() throws Exception {
@@ -44,7 +44,7 @@ class AppControllerTest {
                 .andReturn();
 
         String jsonResponse = result.getResponse().getContentAsString();
-        List<TicketmasterResponseEvent> actualResponse = new ObjectMapper().readValue(jsonResponse, List.class);
+        List<TicketmasterEvent> actualResponse = new ObjectMapper().readValue(jsonResponse, List.class);
 
         assertNotNull(actualResponse);
         verify(musicEventService, times(1)).getMusicEventByArtist(any());

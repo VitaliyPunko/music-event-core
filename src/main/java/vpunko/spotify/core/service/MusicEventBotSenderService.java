@@ -2,7 +2,8 @@ package vpunko.spotify.core.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import vpunko.spotify.core.dto.TicketmasterResponseEvent;
+import vpunko.spotify.core.dto.TicketMasterResponseEvent;
+import vpunko.spotify.core.dto.TicketmasterEvent;
 import vpunko.spotify.core.dto.UserMessageRequestEvent;
 import vpunko.spotify.core.publisher.TicketmasterResponseEventKafkaPublisher;
 
@@ -17,11 +18,14 @@ public class MusicEventBotSenderService {
     private final TicketmasterResponseEventKafkaPublisher publisher;
 
     public void sendMessageToMusicBot(UserMessageRequestEvent data) {
-        List<TicketmasterResponseEvent> musicEventByArtist = musicEventService.getMusicEventByArtist(data.getMessage());
+        List<TicketmasterEvent> musicEventByArtist = musicEventService.getMusicEventByArtist(data.getMessage());
 
-        for (TicketmasterResponseEvent ticketmasterResponseEvent : musicEventByArtist) {
-            publisher.sendMessage(ticketmasterResponseEvent, data.getChatId());
-        }
+        TicketMasterResponseEvent event = new TicketMasterResponseEvent();
+        event.setEvents(musicEventByArtist);
+        event.setChatId(data.getChatId());
+
+        publisher.sendMessage(event);
+
 
     }
 }

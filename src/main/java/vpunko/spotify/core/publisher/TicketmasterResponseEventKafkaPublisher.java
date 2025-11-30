@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import vpunko.spotify.core.dto.TicketmasterResponseEvent;
+import vpunko.spotify.core.dto.TicketMasterResponseEvent;
 
 import static vpunko.spotify.core.constant.MetricsConstant.TICKET_MASTER_RESPONSE_EVENT_PUBLISHER_COUNTER;
 
@@ -17,10 +17,10 @@ import static vpunko.spotify.core.constant.MetricsConstant.TICKET_MASTER_RESPONS
 public class TicketmasterResponseEventKafkaPublisher {
 
     private final String topicName;
-    private final KafkaTemplate<String, TicketmasterResponseEvent> kafkaTemplate;
+    private final KafkaTemplate<String, TicketMasterResponseEvent> kafkaTemplate;
 
     public TicketmasterResponseEventKafkaPublisher(
-            KafkaTemplate<String, TicketmasterResponseEvent> kafkaTemplate,
+            KafkaTemplate<String, TicketMasterResponseEvent> kafkaTemplate,
             @Value("${spring.kafka.out.ticket-master-response-event.topic}") String topicName
     ) {
         this.kafkaTemplate = kafkaTemplate;
@@ -28,9 +28,9 @@ public class TicketmasterResponseEventKafkaPublisher {
     }
 
     @Counted(value = TICKET_MASTER_RESPONSE_EVENT_PUBLISHER_COUNTER)
-    public void sendMessage(TicketmasterResponseEvent message, long chatId) {
+    public void sendMessage(TicketMasterResponseEvent message) {
         log.info("Sending message to music-bot service : {}", message);
 
-        kafkaTemplate.send(topicName, String.valueOf(chatId), message);
+        kafkaTemplate.send(topicName, String.valueOf(message.getChatId()), message);
     }
 }

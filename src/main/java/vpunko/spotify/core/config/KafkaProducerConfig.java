@@ -11,7 +11,7 @@ import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import vpunko.spotify.core.dto.TicketmasterResponseEvent;
+import vpunko.spotify.core.dto.TicketMasterResponseEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class KafkaProducerConfig {
     private String clientId;
 
     @Bean
-    public ProducerFactory<String, TicketmasterResponseEvent> producerFactory() {
+    public ProducerFactory<String, TicketMasterResponseEvent> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
         configProps.put(ProducerConfig.CLIENT_ID_CONFIG, clientId);
@@ -36,7 +36,9 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, TicketmasterResponseEvent> kafkaTemplate(ProducerFactory<String, TicketmasterResponseEvent> producerFactory) {
+    public KafkaTemplate<String, TicketMasterResponseEvent> kafkaTemplate(
+            ProducerFactory<String, TicketMasterResponseEvent> producerFactory
+    ) {
         return new KafkaTemplate<>(producerFactory);
     }
 

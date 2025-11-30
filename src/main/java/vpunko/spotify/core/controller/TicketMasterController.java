@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vpunko.spotify.core.client.TicketMasterRestClient;
-import vpunko.spotify.core.dto.TicketMasterEventResponse;
+import vpunko.spotify.core.dto.TicketMasterEventClientResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,7 +16,7 @@ public class TicketMasterController {
 
     @GetMapping("/getEvent")
     public String getEvent(@RequestParam String keyWord) {
-        TicketMasterEventResponse event = client.getEvent(keyWord, null);
+        TicketMasterEventClientResponse event = client.getEvent(keyWord, null);
         return event.toString();
     }
 
