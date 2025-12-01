@@ -19,6 +19,8 @@ spring:
           clientId: ticket-master-response-producer
 
 app:
+  urls:
+    ticketmaster: https://app.ticketmaster.com/discovery/v2
   credentials:
     ticketmaster:
       apikey: ${TICKETMASTER-APIKEY}
