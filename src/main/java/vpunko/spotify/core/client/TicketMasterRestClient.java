@@ -6,9 +6,12 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import vpunko.spotify.core.dto.TicketMasterEventClientResponse;
+import vpunko.spotify.core.exception.ExceptionCounted;
 import vpunko.spotify.core.exception.TicketMasterClientException;
 
 import java.util.Optional;
+
+import static vpunko.spotify.core.constant.MetricsConstant.TICKET_MASTER_HTTP_CLIENT_ERROR_COUNTER;
 
 /**
  * <a href="https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/">Discovery ticketmaster API</a>
@@ -32,6 +35,7 @@ public class TicketMasterRestClient {
         this.restClient = restClient.baseUrl(baseUrl).build();
     }
 
+    @ExceptionCounted(value = TICKET_MASTER_HTTP_CLIENT_ERROR_COUNTER)
     public TicketMasterEventClientResponse getEvent(String keyWord, String startDate) {
         TicketMasterEventClientResponse body = restClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/events")

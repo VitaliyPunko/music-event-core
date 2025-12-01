@@ -27,7 +27,7 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest
 @EmbeddedKafka(
         partitions = 1,
-        topics = "music-event-core-topic",
+        topics = "music-event-core-topic-test",
         brokerProperties = {
                 "listeners=PLAINTEXT://localhost:9092",
                 "port=9092"
@@ -38,7 +38,7 @@ import static org.mockito.Mockito.verify;
 })
 class UserMessageRequestBotEventKafkaListenerIT {
 
-    private static final String TOPIC = "music-event-core-topic";
+    private static final String TOPIC = "music-event-core-topic-test";
 
     @Autowired
     private KafkaTemplate<String, UserMessageRequestEvent> kafkaTemplate;
