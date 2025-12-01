@@ -22,14 +22,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @EmbeddedKafka(
         partitions = 1,
-        topics = "ticket-master-response-topic"
+        topics = "ticket-master-response-topic-test"
 )
 @TestPropertySource(properties = {
         "spring.kafka.out.ticket-master-response-event.producer.bootstrap-servers=${spring.embedded.kafka.brokers}",
 })
 class TicketmasterEventKafkaPublisherIT {
 
-    private static final String TOPIC = "ticket-master-response-topic";
+    private static final String TOPIC = "ticket-master-response-topic-test";
 
     @Autowired
     private TicketmasterResponseEventKafkaPublisher publisher;

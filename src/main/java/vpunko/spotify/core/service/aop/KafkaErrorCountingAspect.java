@@ -8,7 +8,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
-import vpunko.spotify.core.exception.KafkaExceptionCounted;
+import vpunko.spotify.core.exception.ExceptionCounted;
 
 @Slf4j
 @Aspect
@@ -18,14 +18,14 @@ public class KafkaErrorCountingAspect {
 
     private final MeterRegistry meterRegistry;
 
-    @Around("@annotation(kafkaExceptionCounted)")
+    @Around("@annotation(exceptionCounted)")
     public Object countErrors(ProceedingJoinPoint joinPoint,
-                              KafkaExceptionCounted kafkaExceptionCounted) throws Throwable {
+                              ExceptionCounted exceptionCounted) throws Throwable {
 
         try {
             return joinPoint.proceed();
         } catch (Exception ex) {
-            String counterName = kafkaExceptionCounted.value();
+            String counterName = exceptionCounted.value();
 
             log.error("⚠️ Kafka listener exception. Incrementing counter '{}'", counterName, ex);
 

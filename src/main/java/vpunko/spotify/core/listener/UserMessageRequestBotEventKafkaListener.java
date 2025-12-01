@@ -7,7 +7,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import vpunko.spotify.core.dto.UserMessageRequestEvent;
-import vpunko.spotify.core.exception.KafkaExceptionCounted;
+import vpunko.spotify.core.exception.ExceptionCounted;
 import vpunko.spotify.core.service.MusicEventBotSenderService;
 
 import static vpunko.spotify.core.constant.MetricsConstant.TELEGRAM_BOT_LISTENER_COUNTER;
@@ -23,7 +23,7 @@ public class UserMessageRequestBotEventKafkaListener {
 
     private final MusicEventBotSenderService botSenderService;
 
-    @KafkaExceptionCounted(value = TELEGRAM_BOT_LISTENER_ERROR_COUNTER)
+    @ExceptionCounted(value = TELEGRAM_BOT_LISTENER_ERROR_COUNTER)
     @KafkaListener(topics = "${spring.kafka.in.telegram-bot-user-received-event.topic}")
     @Counted(value = TELEGRAM_BOT_LISTENER_COUNTER)
     void listener(@Payload UserMessageRequestEvent data) {

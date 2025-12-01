@@ -11,6 +11,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class UserMessageRequestEvent implements Serializable {
 
+    public UserMessageRequestEvent(long chatId, String message) {
+        this.chatId = chatId;
+        this.message = message;
+    }
+
     long chatId;
     String message;
+    boolean forTest;
 }

@@ -11,6 +11,10 @@ management:
   metrics:
     enable:
       kafka: true
+  observations:
+    enable:
+      http: true
+      jvm: true
   endpoints:
     web:
       exposure:
@@ -36,7 +40,7 @@ logging:
 telegram:
   bot_username: ${TELEGRAM_BOT_USERNAME}
   bot_token: ${TELEGRAM_BOT_TOKEN}
-  ticketmaster_page_size: 3
+  ticketmaster_page_size: 2
 
 server:
   port: 8080

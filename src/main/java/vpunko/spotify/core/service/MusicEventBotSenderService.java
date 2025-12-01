@@ -23,6 +23,7 @@ public class MusicEventBotSenderService {
         TicketMasterResponseEvent event = new TicketMasterResponseEvent();
         event.setEvents(musicEventByArtist);
         event.setChatId(data.getChatId());
+        event.setForTest(data.isForTest());
 
         publisher.sendMessage(event);
     }
