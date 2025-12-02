@@ -16,7 +16,7 @@ spec:
         - name: dockerhub-secret-music-core
       containers:
         - name: music-event-core-app
-          image: vitaliypunko/music-event-core:0.0.4-cb7d06c
+          image: vitaliypunko/music-event-core:0.0.5
           ports:
             - containerPort: 8080
           env:
