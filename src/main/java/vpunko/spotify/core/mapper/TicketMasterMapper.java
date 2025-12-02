@@ -6,6 +6,7 @@ import vpunko.spotify.core.constant.TicketSaleEnum;
 import vpunko.spotify.core.dto.TicketMasterEventClientResponse;
 import vpunko.spotify.core.dto.TicketmasterEvent;
 
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +121,7 @@ public class TicketMasterMapper {
             String dateTime = start.getDateTime();
             if (dateTime == null) {
                 String localDate = start.getLocalDate();
-                String localTime = start.getLocalTime();
+                String localTime = start.getLocalTime() != null ? start.getLocalTime() : LocalTime.MIDNIGHT.toString();
                 return localDate.concat("T").concat(localTime);
             }
             return dateTime;
